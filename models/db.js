@@ -20,14 +20,7 @@ const sequelize = new Sequelize(
   }
 );
 
-// Testa a conexão com o banco de dados
-db.authenticate()
-  .then(() => console.log("[DB] Conectado com sucesso ao MySQL!")) // Conexão bem-sucedida
-  .catch((erro) => console.error("Erro ao se conectar com o banco de dados:", erro)); // Falha na conexão
-
-// Exporta o construtor Sequelize (para definir tipos de dados nos models)
-export { Sequelize };
-
 // Exporta a instância configurada da conexão (para ser usada em outros arquivos)
 export default db;
+
 
