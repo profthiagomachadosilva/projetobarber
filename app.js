@@ -1,15 +1,18 @@
 import express from "express";
 import bodyParser from "body-parser";
 import cors from "cors";
-
-// Importa o modelo Agendamento
 import Agendamento from "./models/Agendamento.js";
+import path from "path";
+import { fileURLToPath } from "url";
 
 const app = express();
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 app.use(cors());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
+app.use(express.static(path.join(__dirname, "public")));
 
 // =================== ROTAS ===================
 
@@ -91,4 +94,5 @@ app.delete("/agendamentos/:id", function (req, res) {
 // =================== INICIALIZAÇÃO DO SERVIDOR ===================
 app.listen(3000, function () {
     console.log("O servidor está rodando na porta 3000");
+
 });
