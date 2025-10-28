@@ -20,7 +20,7 @@ const sequelize = new Sequelize(
   }
 );
 
-// Exporta a instância configurada da conexão (para ser usada em outros arquivos)
-export default db;
+export default sequelize;
+
 
 
