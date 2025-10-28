@@ -4,7 +4,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     async function carregarAgendamentos() {
         tbody.innerHTML = ""; // limpa a tabela antes de popular
         try {
-            const res = await fetch("http://localhost:3000/agendamentos");
+            const res = await fetch("https://projetobarber.onrender.com/agendamentos");
             const agendamentos = await res.json();
 
             agendamentos.forEach(a => {
@@ -36,7 +36,7 @@ document.addEventListener("DOMContentLoaded", async () => {
                 const id = btn.dataset.id;
                 if (confirm("Deseja realmente deletar este agendamento?")) {
                     try {
-                        const res = await fetch(`http://localhost:3000/agendamentos/${id}`, {
+                        const res = await fetch(`https://projetobarber.onrender.com/agendamentos/${id}`, {
                             method: "DELETE"
                         });
                         const texto = await res.text();
@@ -56,7 +56,7 @@ document.addEventListener("DOMContentLoaded", async () => {
                 const novoHorario = prompt("Digite o novo horário (HH:MM):");
                 if (novoHorario) {
                     try {
-                        const res = await fetch(`http://localhost:3000/agendamentos/${id}`, {
+                        const res = await fetch(`https://projetobarber.onrender.com/agendamentos/${id}`, {
                             method: "PATCH",
                             headers: { "Content-Type": "application/json" },
                             body: JSON.stringify({ horario: novoHorario })
@@ -75,3 +75,4 @@ document.addEventListener("DOMContentLoaded", async () => {
     // Carrega os agendamentos ao abrir a página
     carregarAgendamentos();
 });
+
