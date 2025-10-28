@@ -1,31 +1,22 @@
-// Importa o Sequelize — ORM (Object Relational Mapper) usado para conectar e manipular bancos SQL com JavaScript
-import Sequelize from "sequelize";
-
-// Importa o dotenv — responsável por carregar variáveis de ambiente do arquivo .env
+import { Sequelize } from "sequelize";
 import dotenv from "dotenv";
-
-// Carrega as variáveis do arquivo .env para process.env
 dotenv.config();
 
-// Exibe no console as variáveis de ambiente carregadas (útil para debug)
-// Importante: em produção, evite mostrar senhas no console!
-console.log("DEBUG ENV:", {
-  DB_NAME: process.env.DB_NAME, // Nome do banco de dados
-  DB_USER: process.env.DB_USER,  // Usuário do banco
-  DB_PASS: process.env.DB_PASS, // Senha do banco
-  DB_HOST: process.env.DB_HOST // Endereço do servidor PostgreSql
-});
-
-
-// Cria uma nova instância do Sequelize (a conexão com o banco de dados)
-const db = new Sequelize(
-  process.env.DB_NAME, // Nome do banco
-  process.env.DB_USER, // Usuário
-  process.env.DB_PASS, // Senha
+const sequelize = new Sequelize(
+  process.env.DB_NAME,
+  process.env.DB_USER,
+  process.env.DB_PASS,
   {
-    host: process.env.DB_HOST, // Endereço do servidor MySQL
-    dialect: "postgres", // Tipo de banco (dialeto)
-    port: 5432
+    host: process.env.DB_HOST,
+    dialect: "postgres",
+    port: process.env.DB_PORT || 5432,
+    dialectOptions: {
+      ssl: {
+        require: true,
+        rejectUnauthorized: false // importante para o Render
+      }
+    },
+    logging: false
   }
 );
 
@@ -39,3 +30,4 @@ export { Sequelize };
 
 // Exporta a instância configurada da conexão (para ser usada em outros arquivos)
 export default db;
+
